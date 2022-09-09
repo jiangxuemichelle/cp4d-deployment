@@ -31,7 +31,7 @@ if [ "$ID" == "" ] || [ "$ID" == "null" ]; then
     fi
     echo "Created attachment for $CLUSTER_ID, $WORKER_ID and $VOLUME_ID: $ID"
     echo 'Sleeping for 1 minute...'
-    sleep 1m # it takes some seconds for the attachment to stabilize and propagate
+    sleep 3m # it takes some seconds for the attachment to stabilize and propagate
 else
   echo "Attachment already exists: $RESPONSE"
 fi
