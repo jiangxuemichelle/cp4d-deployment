@@ -11,8 +11,8 @@ RUN install_clean wget unzip jq nano
 WORKDIR /tmp
 
 # terraform
-RUN wget --no-verbose https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip \
- && unzip terraform_0.13.0_linux_amd64.zip \
+RUN wget --no-verbose https://releases.hashicorp.com/terraform/1.2.9/terraform_1.2.9_linux_amd64.zip \
+ && unzip terraform_1.2.9_linux_amd64.zip \
  && mv terraform /usr/bin/ \
  && echo 'alias tf=terraform' >> $HOME/.profile
 
@@ -44,7 +44,16 @@ RUN ibmcloud plugin install container-registry \
 # install jq
 RUN wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64  -O /usr/bin/jq && chmod +x /usr/bin/jq
 
+# install podman
+
+RUN sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+RUN wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_18.04/Release.key -O- | apt-key add -
 RUN apt-get update -y
+RUN apt-get -y upgrade
+RUN apt-get -y install podman
+
+
+#RUN apt-get update -y
 RUN apt-get install -y python
 RUN apt-get install -y python-yaml
 
